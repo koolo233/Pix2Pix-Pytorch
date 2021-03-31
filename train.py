@@ -121,6 +121,9 @@ class Pix2PixMain(object):
         if Settings.DATASET == "edge2shoes":
             input_images = batch["edge_images"].to(self.device)
             target_images = batch["color_images"].to(self.device)
+        elif Settings.DATASET == "Mogaoku":
+            input_images = batch["edge_images"].to(self.device)
+            target_images = batch["color_images"].to(self.device)
         else:
             KeyError("DataSet {} doesn't exit".format(Settings.DATASET))
 

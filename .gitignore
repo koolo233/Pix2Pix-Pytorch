@@ -6,3 +6,4 @@ models/.ipynb_checkpoints
 conf/__pycache__
 conf/.ipynb_checkpoints
 .ipynb_checkpoints/
+.idea/

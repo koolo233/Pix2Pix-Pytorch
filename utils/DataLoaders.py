@@ -19,5 +19,8 @@ def get_dataloader(dataset_name, data_root, batch_size, train_num_workers=0, tra
     elif dataset_name == "edge2shoes":
         from utils.edge2shoes_dataloader import Edge2ShoesDataLoader
         return Edge2ShoesDataLoader(data_root, batch_size, train_num_workers, transforms, val_num_workers)
+    elif dataset_name == "Mogaoku":
+        from utils.Mogaoku_dataloader import Edge2MogaokuDataLoader
+        return Edge2MogaokuDataLoader(data_root, batch_size, train_num_workers, transforms, val_num_workers)
     else:
         KeyError("dataset name error {}".format(dataset_name))
