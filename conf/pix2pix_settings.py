@@ -7,7 +7,7 @@ DISCRIMINATOR_LAYER = 3
 INPUT_SIZE = 256
 
 # train
-EPOCHS = 20
+EPOCHS = 200
 BATCH_SIZE = 4
 TRAIN_NUM_WORKERS = 8
 TEST_NUM_WORKERS = 8
@@ -28,8 +28,10 @@ L1_LOSS_LAMUDA = 100
 USING_DROPOUT_DURING_EVAL = False
 
 # data
-DATASET_ROOT = r"/home/MyDisk3/YZJ/dataset/edges2shoes"
-DATASET = "edge2shoes"
+# DATASET_ROOT = r"/home/MyDisk3/YZJ/dataset/edges2shoes"
+# DATASET = "edge2shoes"
+DATASET_ROOT = r"/home/MyDisk3/YZJ/dataset/mogaoku/connect"
+DATASET = "Mogaoku"
 
 # output
 CONSTANT_FEATURE_DIS_LEN = 4

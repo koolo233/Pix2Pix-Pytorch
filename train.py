@@ -1,5 +1,5 @@
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 import time
 import random
@@ -84,7 +84,7 @@ class Pix2PixMain(object):
                          "errG": list(),
                          "accD": list()}
 
-        output_file = time.strftime("{}_%Y_%m_%d_%H_%M_%S".format("pix2pix"), time.localtime())
+        output_file = time.strftime("{}_{}_%Y_%m_%d_%H_%M_%S".format("pix2pix", Settings.DATASET), time.localtime())
         self.output_root = os.path.join(Settings.OUTPUT_ROOT, output_file)
         os.makedirs(os.path.join(self.output_root, Settings.OUTPUT_MODEL_KEY))
         os.makedirs(os.path.join(self.output_root, Settings.OUTPUT_LOG_KEY))
@@ -93,8 +93,8 @@ class Pix2PixMain(object):
 
     def __call__(self):
 
-        print_steps = int(len(self.train_dataloader) * Settings.PRINT_FREQUENT)
-        eval_steps = int(len(self.train_dataloader) * Settings.EVAL_FREQUENT)
+        print_steps = max(1, int(len(self.train_dataloader) * Settings.PRINT_FREQUENT))
+        eval_steps = max(1, int(len(self.train_dataloader) * Settings.EVAL_FREQUENT))
 
         print("begin train.....")
         for epoch in range(1, Settings.EPOCHS+1):
@@ -202,7 +202,7 @@ class Pix2PixMain(object):
                 else:
                     output_images = torch.cat([output_images, output_image], dim=0)
 
-                if output_images.shape[0] == 40:
+                if output_images.shape[0] == int(len(self.test_dataloader)/4):
 
                     output_images = make_grid(output_images,
                                               padding=2,
