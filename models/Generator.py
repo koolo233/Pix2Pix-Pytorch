@@ -3,7 +3,7 @@ from torch import nn
 from collections import OrderedDict
 
 
-class EnConv(nn.Module):
+class Enconv(nn.Module):
 
     def __init__(self, in_c, out_c, kernel_size, stride, padding, activate=None, if_bn=True, if_dropout=False):
         """
@@ -16,7 +16,7 @@ class EnConv(nn.Module):
         :param if_bn: 是否使用bn层
         :param if_dropout: 是否使用dropout
         """
-        super(EnConv, self).__init__()
+        super(Enconv, self).__init__()
 
         self.conv = nn.Sequential()
 
@@ -38,7 +38,7 @@ class EnConv(nn.Module):
         return self.conv(x)
 
 
-class DecodeConv(nn.Module):
+class Decodeconv(nn.Module):
 
     def __init__(self, in_c, out_c, kernel_size, stride, padding, if_bn=True, activate=None, if_dropout=False):
         """
@@ -52,7 +52,7 @@ class DecodeConv(nn.Module):
         :param if_dropout:
         """
 
-        super(DecodeConv, self).__init__()
+        super(Decodeconv, self).__init__()
 
         self.conv = nn.Sequential()
 
@@ -82,39 +82,39 @@ class Generator(nn.Module):
         super(Generator, self).__init__()
 
         # 256 256
-        self.encode_inconv = EnConv(in_c, ngf, kernel_size=4, stride=2, padding=1, activate=None, if_bn=False)
+        self.encode_inconv = Enconv(in_c, ngf, kernel_size=4, stride=2, padding=1, activate=None, if_bn=False)
         # 128 128
-        self.encode_conv1 = EnConv(ngf, ngf*2, kernel_size=4, stride=2, padding=1, activate="LeakyReLU", if_bn=True)
+        self.encode_conv1 = Enconv(ngf, ngf*2, kernel_size=4, stride=2, padding=1, activate="LeakyReLU", if_bn=True)
         # 64 64
-        self.encode_conv2 = EnConv(ngf*2, ngf*4, kernel_size=4, stride=2, padding=1, activate="LeakyReLU", if_bn=True)
+        self.encode_conv2 = Enconv(ngf*2, ngf*4, kernel_size=4, stride=2, padding=1, activate="LeakyReLU", if_bn=True)
         # 32 32
-        self.encode_conv3 = EnConv(ngf*4, ngf*8, kernel_size=4, stride=2, padding=1, activate="LeakyReLU", if_bn=True)
+        self.encode_conv3 = Enconv(ngf*4, ngf*8, kernel_size=4, stride=2, padding=1, activate="LeakyReLU", if_bn=True)
         # 16 16
-        self.encode_conv4 = EnConv(ngf*8, ngf*8, kernel_size=4, stride=2, padding=1, activate="LeakyReLU", if_bn=True)
+        self.encode_conv4 = Enconv(ngf*8, ngf*8, kernel_size=4, stride=2, padding=1, activate="LeakyReLU", if_bn=True)
         # 8 8
-        self.encode_conv5 = EnConv(ngf*8, ngf*8, kernel_size=4, stride=2, padding=1, activate="LeakyReLU", if_bn=True)
+        self.encode_conv5 = Enconv(ngf*8, ngf*8, kernel_size=4, stride=2, padding=1, activate="LeakyReLU", if_bn=True)
         # 4 4
-        self.encode_conv6 = EnConv(ngf*8, ngf*8, kernel_size=4, stride=2, padding=1, activate="LeakyReLU", if_bn=True)
+        self.encode_conv6 = Enconv(ngf*8, ngf*8, kernel_size=4, stride=2, padding=1, activate="LeakyReLU", if_bn=True)
         # 2 2
-        self.encode_conv7 = EnConv(ngf*8, ngf*8, kernel_size=4, stride=2, padding=1, activate="LeakyReLU", if_bn=False)
+        self.encode_conv7 = Enconv(ngf*8, ngf*8, kernel_size=4, stride=2, padding=1, activate="LeakyReLU", if_bn=False)
         # 1 1
 
-        self.decode_conv1 = DecodeConv(ngf*8, ngf*8, kernel_size=4, stride=2, padding=1, activate="ReLU",
+        self.decode_conv1 = Decodeconv(ngf*8, ngf*8, kernel_size=4, stride=2, padding=1, activate="ReLU",
                                        if_bn=True, if_dropout=True)
         # 2 2
-        self.decode_conv2 = DecodeConv(ngf*8*2, ngf*8, kernel_size=4, stride=2, padding=1, activate="ReLU",
+        self.decode_conv2 = Decodeconv(ngf*8*2, ngf*8, kernel_size=4, stride=2, padding=1, activate="ReLU",
                                        if_bn=True, if_dropout=True)
         # 4 4
-        self.decode_conv3 = DecodeConv(ngf*8*2, ngf*8, kernel_size=4, stride=2, padding=1, activate="ReLU",
+        self.decode_conv3 = Decodeconv(ngf*8*2, ngf*8, kernel_size=4, stride=2, padding=1, activate="ReLU",
                                        if_bn=True, if_dropout=True)
         # 8 8
-        self.decode_conv4 = DecodeConv(ngf*8*2, ngf*8, kernel_size=4, stride=2, padding=1, activate="ReLU", if_bn=True)
+        self.decode_conv4 = Decodeconv(ngf*8*2, ngf*8, kernel_size=4, stride=2, padding=1, activate="ReLU", if_bn=True)
         # 16 16
-        self.decode_conv5 = DecodeConv(ngf*8*2, ngf*4, kernel_size=4, stride=2, padding=1, activate="ReLU", if_bn=True)
+        self.decode_conv5 = Decodeconv(ngf*8*2, ngf*4, kernel_size=4, stride=2, padding=1, activate="ReLU", if_bn=True)
         # 32 32
-        self.decode_conv6 = DecodeConv(ngf*4*2, ngf*2, kernel_size=4, stride=2, padding=1, activate="ReLU", if_bn=True)
+        self.decode_conv6 = Decodeconv(ngf*4*2, ngf*2, kernel_size=4, stride=2, padding=1, activate="ReLU", if_bn=True)
         # 64 64
-        self.decode_conv7 = DecodeConv(ngf*2*2, ngf, kernel_size=4, stride=2, padding=1, activate="ReLU", if_bn=True)
+        self.decode_conv7 = Decodeconv(ngf*2*2, ngf, kernel_size=4, stride=2, padding=1, activate="ReLU", if_bn=True)
         # 128 128
         self.decode_output = nn.Sequential(OrderedDict([
             ("relu", nn.ReLU(inplace=True)),

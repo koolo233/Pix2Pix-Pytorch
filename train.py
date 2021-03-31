@@ -1,5 +1,5 @@
 import os
-import sys
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 import time
 import random
@@ -41,7 +41,7 @@ class Pix2PixMain(object):
                                    ngf=Settings.NGF).to(self.device)
         self.generator.apply(self.generator.weights_init)
         self.discriminator = Discriminator(in_c=Settings.IN_CHANNEL, out_c=Settings.OUT_CHANNEL,
-                                           ndf=Settings.NDF, n_layers=Settings.DISCRIMINATOR_LAYER)
+                                           ndf=Settings.NDF, n_layers=Settings.DISCRIMINATOR_LAYER).to(self.device)
         self.discriminator.apply(self.discriminator.weights_init)
         print("model init done")
 
