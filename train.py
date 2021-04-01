@@ -95,6 +95,7 @@ class Pix2PixMain(object):
 
         print_steps = max(1, int(len(self.train_dataloader) * Settings.PRINT_FREQUENT))
         eval_steps = max(1, int(len(self.train_dataloader) * Settings.EVAL_FREQUENT))
+        batch_steps = max(1, int(Settings.EPOCHS * Settings.BATCH_FREQUENT))
 
         print("begin train.....")
         for epoch in range(1, Settings.EPOCHS+1):
@@ -106,8 +107,9 @@ class Pix2PixMain(object):
                 # print
                 self.print_module(epoch, step, print_steps)
 
-                # val
-                self.val_module(epoch, step, eval_steps)
+                if epoch % batch_steps == 0:
+                    # val
+                    self.val_module(epoch, step, eval_steps)
 
             # save log
             self.log_save_module()
