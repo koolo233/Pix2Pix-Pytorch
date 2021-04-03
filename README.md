@@ -43,7 +43,7 @@ C64-C128-C256-C512-C512-C512
 
 ## 本项目目录结构
 
-.
+Pix2Pix-Pytorch
 ├── conf
 │   └── pix2pix_settings.py  本项目参数设定
 ├── LICENSE
