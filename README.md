@@ -43,19 +43,19 @@ C64-C128-C256-C512-C512-C512
 
 ## 本项目目录结构
 
-Pix2Pix-Pytorch
-├── conf
-│   └── pix2pix_settings.py  本项目参数设定
-├── LICENSE
-├── models
-│   ├── Discriminator.py  判别器
-│   └── Generator.py  生成器
-├── README.md
-├── train.py  训练文件
-└── utils
-    ├── CelebA_dataloader.py  CelebA数据集加载文件
-    ├── Cifar10_dataloader.py  Cifar10数据集加载文件
-    ├── DataLoaders.py  数据集加载函数管理
-    ├── edge2shoes_dataloader.py  edge2shoes数据集加载文件 
-    ├── mnist_dataloader.py  mnist数据集加载文件
-    └── Mogaoku_dataloader.py  莫高窟壁画加载文件
+Pix2Pix-Pytorch  
+├── conf  
+│   └── pix2pix_settings.py  本项目参数设定  
+├── LICENSE  
+├── models  
+│   ├── Discriminator.py  判别器  
+│   └── Generator.py  生成器  
+├── README.md  
+├── train.py  训练文件  
+└── utils  
+    ├── CelebA_dataloader.py  CelebA数据集加载文件  
+    ├── Cifar10_dataloader.py  Cifar10数据集加载文件  
+    ├── DataLoaders.py  数据集加载函数管理  
+    ├── edge2shoes_dataloader.py  edge2shoes数据集加载文件  
+    ├── mnist_dataloader.py  mnist数据集加载文件  
+    └── Mogaoku_dataloader.py  莫高窟壁画加载文件  
